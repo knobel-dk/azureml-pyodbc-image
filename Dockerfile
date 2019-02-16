@@ -1,5 +1,6 @@
 # mssql-python3.6-pyodbc
 # Python runtime with pyodbc to connect to SQL Server
+# FROM https://github.com/zerogjoe/mssql-python3.6-pyodbc/blob/master/Dockerfile
 FROM ubuntu:18.04
 
 # FROM https://hub.docker.com/r/continuumio/miniconda3/dockerfile
@@ -11,6 +12,8 @@ RUN apt-get update --fix-missing && \
     apt-get install -y wget bzip2 ca-certificates curl git && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 
 # apt-get and system utilities
 RUN apt-get update && apt-get install -y \
@@ -46,9 +49,6 @@ RUN pip3 install --upgrade pip
 
 # install SQL Server Python SQL Server connector module - pyodbc
 RUN pip3 install pyodbc
-
-# added
-RUN pip3 install unixodbc
 
 # added
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh && \
